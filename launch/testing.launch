@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+	<rosparam file="$(find robot_and_sensor_hw)/launch/hw.yaml" command="load" />
+	<rosparam file="$(find robot_and_sensor_hw)/launch/controller.yaml" command="load" />
+	<rosparam file="$(find robot_and_sensor_hw)/launch/kuka.yaml" command="load" />
+	<rosparam file="$(find robot_and_sensor_hw)/launch/test_params_sim.yaml" command="load" />
+	
+	
+  <arg name="moveit" default="false" />
+  <arg name="robot" default="r5" />
+  <arg name="scenario" default="" />
+  <arg name="scenario_parameters" default="" />
+	
+	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find iirob_kuka_bringup)/urdf/$(arg robot)$(arg scenario).urdf.xacro' $(arg scenario_parameters)"/>
+<!-- 	<rosparam command="load" file="$(find robot_and_sensor_hw)/launch/r5_force_controllers.yaml" /> -->
+	
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="ignore_timestamp" type="bool" value="true"/>
+  </node>
+	
+	<node name="test" pkg="robot_and_sensor_hw" type="testing_dummy_app" respawn="false" output="screen"/>
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+			 args="joint_state_controller force_torque_sensor_controller my_controller"/>
+	
+	<node name='kuka_rsi_simulator' pkg='kuka_rsi_simulator' type="kuka_rsi_simulator" args="127.0.0.1 49152" />
+	
+	<group>
+      <node name="iirob_kuka_visualization" pkg="rviz" type="rviz" args="-d $(find iirob_kuka_bringup)/rviz/iirob_kuka$(arg scenario).rviz" required="true" />
+      <node name="iirob_kuka_controller_gui" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" />
+      <node name="iirob_kuka_controller_manager_gui" pkg="rqt_controller_manager" type="rqt_controller_manager" />
+  </group>
+	
+<!--	<node name="admittance_controller_spawner" pkg="controller_manager" type="controller_manager" args="load admittance_controller" respawn="false" output="screen"/>  -->
+	
+</launch>
