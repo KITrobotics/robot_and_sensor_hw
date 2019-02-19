@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   iirob_kuka_bringup
   kuka_kr5_support
   r5_ikfast_arm_plugin
+  r5_moveit_config
 )
 
 include_directories(

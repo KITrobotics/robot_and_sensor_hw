@@ -28,5 +28,6 @@
 	<depend>iirob_kuka_bringup</depend>
 	<depend>kuka_kr5_support</depend>
 	<depend>r5_ikfast_arm_plugin</depend>
+	<depend>r5_moveit_config</depend>
 
 </package>

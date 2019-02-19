@@ -24,6 +24,11 @@
 	
 	<node name='kuka_rsi_simulator' pkg='kuka_rsi_simulator' type="kuka_rsi_simulator" args="127.0.0.1 49152" />
 	
+<!--	<include file="$(find iirob_kuka_bringup)/../$(arg robot)_moveit_config/launch/planning_context.launch">
+        <arg name="scenario" value="$(arg scenario)"/>
+        <arg name="load_robot_description" value="false"/>
+    </include>-->
+	
 	<group>
       <node name="iirob_kuka_visualization" pkg="rviz" type="rviz" args="-d $(find iirob_kuka_bringup)/rviz/iirob_kuka$(arg scenario).rviz" required="true" />
       <node name="iirob_kuka_controller_gui" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" />
