@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
   kuka_kr5_support
   r5_ikfast_arm_plugin
   r5_moveit_config
+  iirob_powerball_ikfast_arm_plugin
 )
 
 include_directories(

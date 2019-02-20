@@ -57,7 +57,7 @@ int main(int argc, char** argv)
 //     ROS_ERROR("The plugin failed to load for some reason. Error: %s", ex.what());
 //   }
 
-  ros::Duration period(1.0);
+  ros::Duration period(1./200.);
   while (ros::ok())
   {
     if (init_success) {}

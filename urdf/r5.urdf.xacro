@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot name="r5" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:include filename="$(find iirob_description)/common/urdf/iirob_urdf_header.urdf.xacro" />
+  <!-- <link name="world"/> -->
+
+  <xacro:include filename="$(find iirob_description)/environments/urdf/r5_cell/table.urdf.xacro" />
+  <xacro:r5_cell_table parent="world" has_foam="true">
+      <origin xyz="0.8 -0.25 0" rpy="0 0 1.57079632679" />
+  </xacro:r5_cell_table>
+
+  <xacro:include filename="$(find iirob_description)/environments/urdf/r5_cell/pedestal.urdf.xacro" />
+  <xacro:r5_cell_pedestal prefix="" parent="world">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:r5_cell_pedestal>
+
+  <xacro:include filename="$(find kuka_kr5_support)/urdf/kr5_arc_macro.xacro" />
+  <xacro:kuka_kr5_arc prefix=""/>
+
+  <xacro:include filename="$(find iirob_description)/tools/urdf/flat_change_systems/fwk_050.urdf.xacro" />
+  <xacro:include filename="$(find iirob_description)/tools/urdf/flat_change_systems/fwk_adapter_kr5.urdf.xacro" />
+
+  <xacro:fwk_adapter_kr5 parent="tool0" prefix="">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:fwk_adapter_kr5>
+
+  <xacro:fwk_050 parent="fwk_adapter_tool_link" has_adapter="false" prefix="">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:fwk_050>
+
+</robot>
