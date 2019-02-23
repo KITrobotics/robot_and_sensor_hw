@@ -1,0 +1,8 @@
+- git:
+    uri: 'https://github.com/cbandera/rosparam_handler.git'
+    local-name: rosparam_handler
+    version: master
+- git:
+    local-name: ros_control
+    uri: https://github.com/KITrobotics/ros_control.git
+    version: combined_robot_sensor_hw
