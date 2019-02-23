@@ -6,8 +6,8 @@ force_torque_sensor_controller:
   type: force_torque_sensor_controller/ForceTorqueSensorController
   publish_rate: 400
   
-my_controller:
-  type: testing_controller/ForcePositionController
+force_position_mi_controller:
+  type: force_controllers/ForcePositionControllerMI
   publish_rate: 200
   required_drive_mode: 7
   joints:

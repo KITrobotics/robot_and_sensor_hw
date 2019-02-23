@@ -20,15 +20,5 @@
   <exec_depend>pluginlib</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <depend>controller_manager</depend>
-  <depend>controller_manager_tests</depend>
-	<depend>force_torque_sensor</depend>
-	<depend>kuka_rsi_hw_interface</depend>
-	<depend>kuka_rsi_simulator</depend>
-	<depend>testing_controller</depend>
-	<depend>iirob_kuka_bringup</depend>
-	<depend>kuka_kr5_support</depend>
-	<depend>r5_ikfast_arm_plugin</depend>
-	<depend>r5_moveit_config</depend>
-	<depend>iirob_powerball_ikfast_arm_plugin</depend>
 
 </package>

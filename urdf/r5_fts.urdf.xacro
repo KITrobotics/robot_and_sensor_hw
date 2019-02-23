@@ -2,10 +2,10 @@
 <robot name="r5" xmlns:xacro="http://wiki.ros.org/xacro">
     <xacro:include filename="$(find robot_and_sensor_hw)/urdf/r5.urdf.xacro" />
 
-    <!-- ati ftm115 -->
-    <xacro:include filename="$(find robot_and_sensor_hw)/urdf/ftm115.urdf.xacro" />
-    <xacro:ati_ftm115 name="fts" parent="fwk_tool_link">
+    <xacro:include filename="$(find force_torque_sensor)/urdf/fts_sim.urdf.xacro" />
+		
+    <xacro:fts_sim name="fts" parent="fwk_tool_link">
         <origin xyz="0 0 0" rpy="0 0 0" />
-    </xacro:ati_ftm115>
+    </xacro:fts_sim>
 
 </robot>

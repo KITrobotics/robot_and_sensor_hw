@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+	<rosparam file="$(find robot_and_sensor_hw)/config/robot_and_sensor_hw.yaml" command="load" />
+	<rosparam file="$(find robot_and_sensor_hw)/config/controllers.yaml" command="load" />
+	<rosparam file="$(find robot_and_sensor_hw)/config/kuka_controller_joint_names.yaml" command="load" />
+	<rosparam file="$(find robot_and_sensor_hw)/config/kuka_rsi_params.yaml" command="load" />
+	
+  <arg name="listen_address" default="127.0.0.1" />
+  <arg name="listen_port" default="49152" />
+	
+	<node name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py">
+    <rosparam command="load" file="$(find robot_and_sensor_hw)/config/teleop_sim.yaml"/>
+  </node>
+	
+	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find robot_and_sensor_hw)/urdf/r5_fts.urdf.xacro'"/>
+  <param name="robot_description_semantic" textfile="$(find robot_and_sensor_hw)/urdf/r5.srdf" />
+	
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="ignore_timestamp" type="bool" value="true"/>
+  </node>
+	
+	<node name='kuka_rsi_simulator' pkg='kuka_rsi_simulator' type="kuka_rsi_simulator" 
+			  args="$(arg listen_address) $(arg listen_port)" />
+	
+	<node name="test" pkg="robot_and_sensor_hw" type="robot_and_sensor_hw_node" respawn="false" output="screen">
+		<remap from="/cmd_force" to="/cmd_vel" />
+	</node>
+	
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+			 args="joint_state_controller force_torque_sensor_controller force_position_mi_controller"/>
+	
+	<group>
+      <node name="iirob_kuka_visualization" pkg="rviz" type="rviz" args="-d $(find robot_and_sensor_hw)/rviz/iirob_kuka.rviz" required="true" />
+  </group>
+	
+</launch>

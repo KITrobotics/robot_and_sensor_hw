@@ -41,7 +41,7 @@ namespace robot_and_sensor_hw
                             const std::list<hardware_interface::ControllerInfo>& stop_list);
 
         /**
-        * Reads data from the robot HW
+        * Reads data from the robot and sensor HW
         *
         * \param time The current time
         * \param period The time passed since the last call to \ref read
@@ -64,15 +64,7 @@ namespace robot_and_sensor_hw
         hardware_interface::RobotHWSharedPtr robot_hw_;
         hardware_interface::SensorHWSharedPtr sensor_hw_;
         
-//         virtual bool loadRobotHW(const std::string& name);
-//         virtual bool loadSensorHW(const std::string& name);
         virtual bool loadHW(const std::string& name, bool isSensor = false);
-        
-        /** \brief Filters the start and stop lists so that they only contain the controllers and
-         * resources that correspond to the robot_hw interface manager
-         */
-//         void filterControllerList(const std::list<hardware_interface::ControllerInfo>& list,
-//                                   std::list<hardware_interface::ControllerInfo>& filtered_list);
     };
     
 }
