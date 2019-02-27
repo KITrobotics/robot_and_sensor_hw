@@ -1,0 +1,8 @@
+Node:
+  frequency: 300.
+robot_hardware: hw1
+sensor_hardware: sensor1
+hw1:
+  type: kuka_rsi_hw_interface/KukaHardwareInterface
+sensor1:
+  type: force_torque_sensor/ForceTorqueSensorHandler

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<robot name="r5" xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find robot_and_sensor_hw)/urdf/r5.urdf.xacro" />
+
+		<xacro:include filename="$(find schunk_description)/urdf/ftc/ftc50_macro.urdf.xacro" />
+		
+    <xacro:schunk_ftc50 name="fts" parent="fwk_tool_link">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:schunk_ftc50>
+
+</robot>
+

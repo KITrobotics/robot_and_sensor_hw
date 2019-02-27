@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+	<rosparam file="$(find robot_and_sensor_hw)/config/kuka_ftc50.yaml" command="load" />
+	<rosparam file="$(find robot_and_sensor_hw)/config/kuka_ftc50_controllers.yaml" command="load" />
+	<rosparam file="$(find robot_and_sensor_hw)/config/kuka_controller_joint_names.yaml" command="load" />
+TODO <rosparam file="$(find robot_and_sensor_hw)/config/kuka_ftc50_rsi_params.yaml" command="load" /> 
+	
+	<rosparam file="$(find schunk_ftc50)/config/ftc_driver.yaml" command="load" />
+  <rosparam file="$(find schunk_ftc50)/config/sensor_configuration.yaml" command="load" />
+  <rosparam ns="Calibration/Offset" file="$(find schunk_ftc50)/config/sensor_offset.yaml" command="load" />
+	
+	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find robot_and_sensor_hw)/urdf/kuka_ftc50.urdf'"/>
+  <param name="robot_description_semantic" textfile="$(find robot_and_sensor_hw)/urdf/r5.srdf" />
+	
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="ignore_timestamp" type="bool" value="true"/>
+  </node>
+	
+	<node name="test" pkg="robot_and_sensor_hw" type="robot_and_sensor_hw_node" respawn="false" output="screen" />
+	
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+			 args="joint_state_controller force_torque_sensor_controller force_position_mi_controller"/>
+	
+	<group>
+      <node name="iirob_kuka_visualization" pkg="rviz" type="rviz" args="-d $(find robot_and_sensor_hw)/rviz/iirob_kuka.rviz" required="true" />
+  </group>
+	
+</launch>
+
